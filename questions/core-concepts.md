@@ -28,7 +28,8 @@ Angular Modules (`NgModule`) are containers that group related components, direc
 })
 export class AppModule {}
 
-:information_source: ℹ️ Use feature modules (UserModule, AdminModule) to improve separation of concerns and lazy loading.
+ℹ️ **Tip:** Use feature modules (`UserModule`, `AdminModule`) to improve separation of concerns and enable lazy loading.
 
 [🔙 Back to Question](#1-what-is-an-angular-module)
+
 
