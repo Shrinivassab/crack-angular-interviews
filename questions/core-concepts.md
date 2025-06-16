@@ -27,9 +27,32 @@ Angular Modules (`NgModule`) are containers that group related components, direc
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-
+```
 ℹ️ **Tip:** Use feature modules (`UserModule`, `AdminModule`) to improve separation of concerns and enable lazy loading.
 
 [🔙 Back to Question](#1-what-is-an-angular-module)
 
+### 2. What are the key parts of an Angular Component?
 
+An Angular component includes:
+
+- @Component decorator
+
+- A class that contains business logic
+
+- An HTML template
+
+- Optional CSS styles
+
+``` ts
+@Component({
+  selector: 'app-hello',
+  templateUrl: './hello.component.html',
+  styleUrls: ['./hello.component.css']
+})
+export class HelloComponent {
+  name = 'Shrinivass';
+}
+```
+
+[🔙 Back to Question](#2-what-are-the-key-parts-of-an-angular-component)
