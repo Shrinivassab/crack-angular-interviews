@@ -10,7 +10,8 @@ This document covers foundational Angular topics, formatted for quick review and
 3. [Explain Angular Lifecycle Hooks](#q3-hooks)  
 4. [What is Dependency Injection (DI) in Angular?](#q4-di)  
 5. [What are the types of Data Binding in Angular?](#q5-binding)  
-6. [Bonus: Structural vs Attribute Directives](#q6-directives)  
+6. [Bonus: Structural vs Attribute Directives](#q6-directives)
+7. [How do Components Communicate?](#q7-components-communicate)
 
 ---
 
@@ -162,5 +163,50 @@ Data binding connects the component’s logic and view.
 <p [ngClass]="{ 'highlight': isActive }">Status</p>
 <div [ngStyle]="{'font-size.px': 14}">Text</div>
 ```
+
+[🔙 Back to Table of Contents](#toc)
+
+## <a id="q7-components-communicate"></a>7. How do components communicate (@Input(), @Output(), EventEmitter)
+
+Components communicate primarily through @Input() and @Output() decorators, which define their public API for data flow.    
+
+**Parent-to-Child Communication (@Input())**
+- **Mechanism**: The `@Input()` decorator allows a parent component to pass data into a child component.   
+- **Usage**: A property in the child component is decorated with `@Input()`. The parent binds a value to this input property using property binding.
+
+```typescript
+// child.component.ts
+import { Component, Input } from '@angular/core';
+@Component({ selector: 'app-child', template: `<p>Child Message: {{ childMessage }}</p>` })
+export class ChildComponent {
+  @Input() childMessage: string; // Input property
+}
+
+// parent.component.html
+<app-child [childMessage]="parentData"></app-child>
+```
+
+**Child-to-Parent Communication (@Output() and EventEmitter)**
+- **Mechanism**: The `@Output()` decorator allows a child component to send data out to its parent. It's typically initialized as an EventEmitter.
+- **Usage**: The child component calls `emit()` on its `EventEmitter`instance to send data. The parent listens for this custom event using event binding () in its template. 
+
+```typescript
+// child.component.ts
+import { Component, Output, EventEmitter } from '@angular/core';
+@Component({ selector: 'app-child', template: `<button (click)="sendMessage()">Send to Parent</button>` })
+export class ChildComponent {
+  @Output() messageToParent = new EventEmitter<string>(); // Output property
+  sendMessage() {
+    this.messageToParent.emit('Hello from Child!');
+  }
+}
+
+// parent.component.html
+<app-child (messageToParent)="receiveMessage($event)"></app-child>
+```
+> [!TIP]
+> For communication between unrelated components (e.g., siblings), use a shared service with `Observables` to maintain loose coupling and encourage modularity.
+
+**💡 Tip:** For communication between unrelated components (e.g., siblings), use a shared service with `Observables` to maintain loose coupling and encourage modularity.
 
 [🔙 Back to Table of Contents](#toc)
