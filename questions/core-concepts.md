@@ -207,6 +207,4 @@ export class ChildComponent {
 > [!TIP]
 > For communication between unrelated components (e.g., siblings), use a shared service with `Observables` to maintain loose coupling and encourage modularity.
 
-**💡 Tip:** For communication between unrelated components (e.g., siblings), use a shared service with `Observables` to maintain loose coupling and encourage modularity.
-
 [🔙 Back to Table of Contents](#toc)
