@@ -12,7 +12,7 @@ This document covers foundational Angular topics, formatted for quick review and
 5. [What are the types of Data Binding in Angular?](#q5-binding)  
 6. [Bonus: Structural vs Attribute Directives](#q6-directives)
 7. [How do Components Communicate?](#q7-components-communicate)
-
+8. [What are Angular Services and why are they Singletons?](#q8-angular-services-singletons)
 ---
 
 ## <a id="q1-module"></a>1. What is an Angular Module?
@@ -206,5 +206,26 @@ export class ChildComponent {
 ```
 > [!TIP]
 > For communication between unrelated components (e.g., siblings), use a shared service with `Observables` to maintain loose coupling and encourage modularity.
+
+[🔙 Back to Table of Contents](#toc)
+
+
+## <a id="q8-angular-services-singletons"></a>8. What are Angular Services and why are they Singletons?
+
+Angular services are classes designed to encapsulate reusable logic and data that can be shared across various components or modules. Their primary purpose is to organize code, separate concerns, and increase modularity.
+
+### 🧩 Singleton Pattern
+
+**Default Behavior**  
+By default, Angular services follow the Singleton Pattern. This means when a service is provided at the root level (`providedIn: 'root'`) or via an eagerly loaded module, Angular creates only **one instance** for the entire application lifecycle.
+
+**Shared Instance**  
+This instance is shared across all components, directives, or other services that inject it, ensuring consistency and avoiding duplication.
+
+### ✅ Benefits of Singleton Services
+
+- **Shared State**: Great for holding and managing global or application-level state (e.g., user session, app configuration).
+- **Centralized Logic**: Keeps business logic like logging, authentication, and API calls centralized, supporting the DRY principle.
+- **Memory Efficiency**: Avoids unnecessary instantiations, conserving memory and improving performance.
 
 [🔙 Back to Table of Contents](#toc)
